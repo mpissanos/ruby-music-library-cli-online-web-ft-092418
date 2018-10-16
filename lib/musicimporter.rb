@@ -6,7 +6,7 @@ class MusicImporter
     @path = path
   end
 
-#returns all imported file names
+
   def files
     files = []
     Dir.glob("#{path}/*.mp3").collect do |file|
@@ -16,6 +16,6 @@ class MusicImporter
   end
 
   def import
-    files.each{|file| Song.new_by_}
+    files.each{|file| Song.new_by}
   end
 end
