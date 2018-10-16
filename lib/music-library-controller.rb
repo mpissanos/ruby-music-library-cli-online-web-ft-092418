@@ -5,7 +5,7 @@ class MusicLibraryController
    def call
     input = ""
     until input == "exit"
-      puts "Welcome User!"
+      puts "Welcome to your music library!"
       puts "Please enter action"
       input = gets.chomp
       case input
