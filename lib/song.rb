@@ -8,6 +8,7 @@ class Song
     @name = name
     self.artist= artist if artist!=nil
     self.genre= genre if genre!=nil
+   
   end
 
   def artist= (artist)
@@ -49,8 +50,9 @@ class Song
   end
 
   def self.find_or_create_by_name(name)
-      self.find_by_name(name) || self.create(name)
+     self.find_by_name(name) || self.create(name)
   end
+
 
   def self.new_from_filename(filename)
     split_file = filename.gsub(".mp3", "").split(" - ")

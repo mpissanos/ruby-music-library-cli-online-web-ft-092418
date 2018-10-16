@@ -41,36 +41,36 @@ class MusicLibraryController
   end
   
   
-   def print_song(song, i)
+  def print_song(song, i)
      puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-   end
+  end
    
-   def print_artist (artist, i)
+  def print_artist (artist, i)
      puts "#{i}. #{artist.name}"
-   end
+  end
    
-   def print_genre(genre, i)
+  def print_genre(genre, i)
      puts "#{i}. #{genre.name}"
-   end
+  end
    
-   def list_songs
-     ordered_list =  Song.sort_by_song_name
-     ordered_list.each.with_index(1) { |song, i| print_song(song, i)}
-   end
+  def list_songs
+      ordered_list =  Song.sort_by_song_name
+      ordered_list.each.with_index(1) { |song, i| print_song(song, i)}
+  end
     
    
-   def list_artists
-   sorted_list =  Artist.sort_by_artist_name
-    sorted_list.each.with_index(1) {|artist, i| print_artist(artist, i)}
+  def list_artists
+      sorted_list =  Artist.sort_by_artist_name
+      sorted_list.each.with_index(1) {|artist, i| print_artist(artist, i)}
   end
    
-   def list_genres
-   sorted_list =  Genre.sort_by_genre_name
-    sorted_list.each.with_index(1) { |genre, i| print_genre(genre, i) }
+  def list_genres
+      sorted_list =  Genre.sort_by_genre_name
+      sorted_list.each.with_index(1) { |genre, i| print_genre(genre, i) }
   end
    
    
-   def list_artist
+  def list_artist
     puts "Enter artist"
     specific_artist = gets.chomp
     if Artist.find_by_name(specific_artist) != nil
@@ -80,22 +80,22 @@ class MusicLibraryController
     end
   end
    
-   def list_genre
+  def list_genre
     puts "Enter genre"
     specific_genre = gets.chomp
-    if Genre.find_by_name(specific_genre) != nil
-      Genre.find_by_name(specific_genre).songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
-    else
-      puts "Genre does not exist"
-    end
+      if Genre.find_by_name(specific_genre) != nil
+        Genre.find_by_name(specific_genre).songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
+      else
+        puts "Genre does not exist"
+      end
   end
   
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     specific_artist = gets.chomp
       if Artist.find_by_name(specific_artist) != nil
-       song_list = Artist.find_by_name(specific_artist).songs.sort_by {|song| song.name}
-       song_list.each.with_index(1) {|song, i| puts "#{i}. #{song.name} - #{song.genre.name}"}
+        song_list = Artist.find_by_name(specific_artist).songs.sort_by {|song| song.name}
+        song_list.each.with_index(1) {|song, i| puts "#{i}. #{song.name} - #{song.genre.name}"}
       end
   end
   
@@ -105,16 +105,19 @@ class MusicLibraryController
       if Genre.find_by_name(specific_genre) != nil
         song_list = Genre.find_by_name(specific_genre).songs.sort_by {|song| song.name}
         song_list.each.with_index(1) {|song, i| puts "#{i}. #{song.artist.name} - #{song.name}"}
-  end
-end
+      end
+    end
+    
 
   def play_song
     puts "Which song number would you like to play?"
-    puts list_songs
-    choice = gets.chomp
-    
-
+    choice = gets.strip.to_i
+      if choice.between?(1, Song.all.length)
+        song = Song.sort_by_song_name[choice - 1]
+        puts "Playing #{song.name} by #{song.artist.name}"
+      end
   end
-  
+
+
   
 end
