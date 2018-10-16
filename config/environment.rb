@@ -16,7 +16,7 @@ module Concerns::Findable
       find_by_name(name) || create(name)
     end
   end
-end
+
 
 #This is used for requiring files within our project.
 # require_relative "Other Files"
