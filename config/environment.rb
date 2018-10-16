@@ -13,3 +13,4 @@ module Concerns::Findable
 #This is used for requiring files within our project.
 # require_relative "Other Files"
 require_all 'lib'
+
